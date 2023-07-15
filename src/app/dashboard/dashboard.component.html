@@ -1,6 +1,6 @@
 <mat-drawer-container class="example-container" autosize>
     <!--SIDEBAR-->
-    <mat-drawer #drawer class="example-sidenav" mode="over">
+    <mat-drawer #drawer class="example-sidenav" mode="side">
         <p>Auto-resizing sidenav</p>
         <p *ngIf="showFiller">Aqui vera el texto extra.</p>
         <button (click)="showFiller = !showFiller" mat-raised-button>
@@ -17,9 +17,14 @@
             <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
                 <mat-icon>menu</mat-icon>
             </button>
-            <span>Pre Entrega 1 - Rodriguez Peña Lisandro</span>
+            <span>Pre Entrega 1 - Rodriguez Peña Lisandro - Angular</span>
         </mat-toolbar>
         <!--FIN TOOLBAR-->
+
+        <main class="p-3">
+            <!-- <app-home></app-home> -->
+            <app-users></app-users>
+        </main>
     </div>
 
 </mat-drawer-container>
