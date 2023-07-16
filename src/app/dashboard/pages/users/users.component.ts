@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { UserFormDialogComponent } from './components/user-form-dialog/user-form-dialog.component';
 
 @Component({
   selector: 'app-users',
@@ -7,21 +8,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent {
+constructor(
+  private matDialog: MatDialog
+) {}
 
-  nameControl = new FormControl(null, [Validators.required]);
-  surnameControl = new FormControl(null, [Validators.required]);
-  emailControl = new FormControl(null, [Validators.required]);
-  passwordControl = new FormControl(null, [Validators.required]);
-
-  userForm = new FormGroup({
-    name: this.nameControl,
-    surname: this.surnameControl,
-    email: this.emailControl,
-    password: this.passwordControl
-  });
-
-  onSubmit(): void{
-    alert(JSON.stringify(this.userForm.value))
-  }
+onCreateUser(): void {
+  this.matDialog.open(UserFormDialogComponent)
+}
 
 }
