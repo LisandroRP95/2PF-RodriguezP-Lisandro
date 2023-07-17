@@ -3,15 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UserFormDialogComponent } from './components/user-form-dialog/user-form-dialog.component';
 import { User } from './models';
 
-const ELEMENT_DATA: User[] = [
-  {
-    id: 1,
-    name: 'Lisandro',
-    surname: 'Rodriguez Peña',
-    email: 'licharp41@gmai.com',
-    password: '1234',
-  }
-];
+const ELEMENT_DATA: User[] = [];
 
 @Component({
   selector: 'app-users',
