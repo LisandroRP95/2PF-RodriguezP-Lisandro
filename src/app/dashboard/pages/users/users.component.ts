@@ -13,7 +13,18 @@ constructor(
 ) {}
 
 onCreateUser(): void {
-  this.matDialog.open(UserFormDialogComponent)
+  const dialogRef = this.matDialog.open(UserFormDialogComponent);
+
+  dialogRef.afterClosed().subscribe({
+    next: (v) => {
+      if (v){
+      console.log(`Recibimos el valor: ` + v);
+    } else{
+      console.log(`Se cancelo`);
+      
+    }
+  }
+  })
 }
 
 }

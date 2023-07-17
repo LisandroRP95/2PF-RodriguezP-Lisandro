@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-user-form-dialog',
@@ -7,7 +8,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./user-form-dialog.component.scss']
 })
 export class UserFormDialogComponent {
-
   nameControl = new FormControl(null, [Validators.required]);
   surnameControl = new FormControl(null, [Validators.required]);
   emailControl = new FormControl(null, [Validators.required]);
@@ -20,9 +20,15 @@ export class UserFormDialogComponent {
     password: this.passwordControl
   });
 
+  constructor(private dialogRef: MatDialogRef<UserFormDialogComponent>) {}
+
   onSubmit(): void{
     alert(JSON.stringify(this.userForm.value))
-  }
+    if (this.userForm.invalid){
+      this.userForm.markAllAsTouched();
+    }else{
+    this.dialogRef.close(this.userForm.value);
+  }}
 
 
 }
