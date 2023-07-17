@@ -9,10 +9,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { FullNamePipe } from './pipes/full-name.pipe';
+import { ControlErrorMessagePipe } from './pipes/control-error-message.pipe';
 
 @NgModule({
   declarations: [
-    FullNamePipe
+    FullNamePipe,
+    ControlErrorMessagePipe
   ],
   imports: [
     CommonModule
@@ -26,7 +28,8 @@ import { FullNamePipe } from './pipes/full-name.pipe';
     MatFormFieldModule,
     MatDialogModule,
     MatTableModule,
-    FullNamePipe
+    FullNamePipe,
+    ControlErrorMessagePipe
   ]
 })
 export class SharedModule { }
