@@ -1,11 +1,13 @@
 <mat-drawer-container class="example-container" autosize>
     <!--SIDEBAR-->
     <mat-drawer #drawer class="example-sidenav" mode="side">
-        <p>Auto-resizing sidenav</p>
+        <ul>
+            <li><a href="">Inicio</a></li><br>
+            <li><a href="">Cursos</a></li><br>
+            <li><a href="">Calificaciones</a></li><br>
+            <li><a href="">Asistencias</a></li><br>
+        </ul>
         <p *ngIf="showFiller">Aqui vera el texto extra.</p>
-        <button (click)="showFiller = !showFiller" mat-raised-button>
-            ver texto extra
-        </button>
     </mat-drawer>
     <!--FIN SIDEBAR-->
 
@@ -14,7 +16,8 @@
 
         <!--TOOLBAR-->
         <mat-toolbar>
-            <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
+            <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+                (click)="drawer.toggle()">
                 <mat-icon>menu</mat-icon>
             </button>
             <span appTitleSize>Pre Entrega 1 - Rodriguez Peña Lisandro - Angular</span>

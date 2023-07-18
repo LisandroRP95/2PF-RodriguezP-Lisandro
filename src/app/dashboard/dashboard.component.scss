@@ -5,18 +5,22 @@
   }
   
 .example-sidenav-content {
-    background-color: rgb(187, 234, 230);
+    background-color: rgb(187, 123, 250);
     height: 100%;
     align-items: center;
     justify-content: center;
   }
 
   .example-sidenav {
-    background-color: rgb(11, 116, 126);
+    background-color: rgb(74, 11, 126);
     color: beige;
     padding: 20px;
   }
   
   main{
     min-height: calc(100vh - #{64px});
+  }
+
+  a{
+    color: azure;
   }
