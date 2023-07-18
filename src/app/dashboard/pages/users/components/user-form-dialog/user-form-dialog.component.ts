@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { User } from '../../models';
 
 @Component({
   selector: 'app-user-form-dialog',
@@ -8,10 +9,10 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./user-form-dialog.component.scss']
 })
 export class UserFormDialogComponent {
-  nameControl = new FormControl(null, [Validators.required]);
-  surnameControl = new FormControl(null, [Validators.required]);
-  emailControl = new FormControl(null, [Validators.required]);
-  passwordControl = new FormControl(null, [Validators.required]);
+  nameControl = new FormControl<string | null >(null, [Validators.required]);
+  surnameControl = new FormControl<string | null >(null, [Validators.required]);
+  emailControl = new FormControl<string | null >(null, [Validators.required]);
+  passwordControl = new FormControl<string | null >(null, [Validators.required]);
 
   userForm = new FormGroup({
     name: this.nameControl,
@@ -20,10 +21,19 @@ export class UserFormDialogComponent {
     password: this.passwordControl
   });
 
-  constructor(private dialogRef: MatDialogRef<UserFormDialogComponent>) {}
+  constructor(
+    private dialogRef: MatDialogRef<UserFormDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) private data?: User,
+    ) {
+      if(this.data){
+        this.nameControl.setValue(this.data.name);
+        this.surnameControl.setValue(this.data.surname);
+        this.emailControl.setValue(this.data.email);
+        this.passwordControl.setValue(this.data.password);
+      }
+    }
 
   onSubmit(): void{
-    alert(JSON.stringify(this.userForm.value))
     if (this.userForm.invalid){
       this.userForm.markAllAsTouched();
     }else{

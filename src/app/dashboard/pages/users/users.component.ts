@@ -40,4 +40,34 @@ onCreateUser(): void {
   })
 }
 
+onDeleteUser(userToDelete: User): void {
+console.log(userToDelete);
+  if (confirm(`¿Realmente quiere eliminar a ${userToDelete.surname}, ${userToDelete.name}?`)){
+    this.users = this.users.filter((u) => u.id !== userToDelete.id);
+  }
+}
+
+onEditUser(userToEdit: User): void {
+  console.log(userToEdit);
+  this.matDialog.open(UserFormDialogComponent, {
+    data: userToEdit
+  })
+  
+  .afterClosed()
+  .subscribe({
+    next: (userUpdated) => {
+      console.log(userUpdated);
+    if (userUpdated) {
+      this.users = this.users.map((user) =>{
+        
+
+        return user.id === userToEdit.id ? {...user, ...userUpdated} : user;
+      })
+    }
+
+  },
+  });
+  
+}
+
 }

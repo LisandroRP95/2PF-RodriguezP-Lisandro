@@ -1,5 +1,5 @@
 import { DataSource } from '@angular/cdk/collections';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { User } from '../../models';
 
 
@@ -10,9 +10,17 @@ import { User } from '../../models';
   styleUrls: ['./users-table.component.scss']
 })
 export class UsersTableComponent {
-  displayedColumns: string[] = ['id', 'fullName', 'email'];
+  displayedColumns: string[] = ['id', 'fullName', 'email', 'actions'];
 
 
 @Input()
 dataSource: User[] = [];
+
+@Output()
+deleteUser = new EventEmitter<User>();
+
+
+@Output()
+editUser = new EventEmitter<User>();
+
 }
