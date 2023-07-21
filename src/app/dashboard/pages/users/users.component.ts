@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UserFormDialogComponent } from './components/user-form-dialog/user-form-dialog.component';
 import { User } from './models';
+import { UserService } from '../user/user.service';
+import { NotifierService } from 'src/app/core/services/notifier.service';
+import { Observable } from 'rxjs';
 
-const ELEMENT_DATA: User[] = [];
+
 
 @Component({
   selector: 'app-users',
@@ -12,30 +15,43 @@ const ELEMENT_DATA: User[] = [];
 })
 export class UsersComponent {
 
-public users: User[] = ELEMENT_DATA;
+public users: Observable<User[]>;
 
-constructor(private matDialog: MatDialog) {}
+constructor(
+  private matDialog: MatDialog,
+  private UserService: UserService,
+  private nofitier: NotifierService,
+  @Inject('IS_DEV') private isDev: boolean,
+  ) {
+
+    this.users = this.UserService.getUsers();
+    this.UserService.loadUsers();
+    // this.UserService.getUsers().subscribe({
+    //   next: (users) => {
+    //     this.users = users;
+    //   }
+    // });
+  }
 
 onCreateUser(): void {
   const dialogRef = this.matDialog.open(UserFormDialogComponent);
 
   dialogRef.afterClosed().subscribe({
-    next: (v) => {
-      if (v){
-      this.users = [
-        ...this.users,
-        {
-            id: this.users.length + 1,
-            name: v.name,
-            surname: v.surname,
-            email: v.email,
-            password: v.password
-          },
-      ];
-      console.log('Recibimos el valor: ', v);
-    } else{
-      console.log('Se cancelo');
-    }
+    next: (newUser) => {
+      if (newUser){
+      // this.users = [
+      //   // ...this.users,
+      //   // {
+      //   //     id: this.users,
+      //   //     name: newUser.name,
+      //   //     surname: newUser.surname,
+      //   //     email: newUser.email,
+      //   //     password: newUser.password
+      //   //   },
+          
+      // ];        
+      this.UserService.sendNotification('Se cargo el usuario');
+    } else{}
   }
   })
 }
@@ -43,12 +59,11 @@ onCreateUser(): void {
 onDeleteUser(userToDelete: User): void {
 console.log(userToDelete);
   if (confirm(`¿Realmente quiere eliminar a ${userToDelete.surname}, ${userToDelete.name}?`)){
-    this.users = this.users.filter((u) => u.id !== userToDelete.id);
+    
   }
 }
 
 onEditUser(userToEdit: User): void {
-  console.log(userToEdit);
   this.matDialog.open(UserFormDialogComponent, {
     data: userToEdit
   })
@@ -57,13 +72,7 @@ onEditUser(userToEdit: User): void {
   .subscribe({
     next: (userUpdated) => {
       console.log(userUpdated);
-    if (userUpdated) {
-      this.users = this.users.map((user) =>{
-        
-
-        return user.id === userToEdit.id ? {...user, ...userUpdated} : user;
-      })
-    }
+    if (userUpdated) {}
 
   },
   });

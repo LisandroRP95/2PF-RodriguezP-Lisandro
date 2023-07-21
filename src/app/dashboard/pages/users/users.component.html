@@ -6,7 +6,7 @@
 </div>
 
 <app-users-table
-    [dataSource]="users"
+    [dataSource]="(users | async) ||[]"
     (deleteUser)="onDeleteUser($event)"
     (editUser)="onEditUser($event)"
 ></app-users-table>
