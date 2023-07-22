@@ -24,7 +24,6 @@ constructor(
   ) {
 
     this.users = this.UserService.getUsers().pipe(
-    tap((valorOriginal) => console.log('valor antes del map', valorOriginal)),
     map((valorOriginal) =>
     valorOriginal.map((usuario)=>({
       ...usuario,
@@ -32,7 +31,6 @@ constructor(
       surname:usuario.surname.toUpperCase(),
     }))
     ),
-    tap((valorMapeado) => console.log('valor despues del map', valorMapeado)),
     );
 
     this.UserService.loadUsers();
