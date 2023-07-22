@@ -4,8 +4,7 @@ import { UserFormDialogComponent } from './components/user-form-dialog/user-form
 import { User } from './models';
 import { UserService } from '../user/user.service';
 import { NotifierService } from 'src/app/core/services/notifier.service';
-import { Observable } from 'rxjs';
-
+import { Observable, map, tap } from 'rxjs';
 
 
 @Component({
@@ -24,13 +23,19 @@ constructor(
   @Inject('IS_DEV') private isDev: boolean,
   ) {
 
-    this.users = this.UserService.getUsers();
+    this.users = this.UserService.getUsers().pipe(
+    tap((valorOriginal) => console.log('valor antes del map', valorOriginal)),
+    map((valorOriginal) =>
+    valorOriginal.map((usuario)=>({
+      ...usuario,
+      name: usuario.name.toUpperCase(),
+      surname:usuario.surname.toUpperCase(),
+    }))
+    ),
+    tap((valorMapeado) => console.log('valor despues del map', valorMapeado)),
+    );
+
     this.UserService.loadUsers();
-    // this.UserService.getUsers().subscribe({
-    //   next: (users) => {
-    //     this.users = users;
-    //   }
-    // });
   }
 
 onCreateUser(): void {
@@ -39,17 +44,13 @@ onCreateUser(): void {
   dialogRef.afterClosed().subscribe({
     next: (newUser) => {
       if (newUser){
-      // this.users = [
-      //   // ...this.users,
-      //   // {
-      //   //     id: this.users,
-      //   //     name: newUser.name,
-      //   //     surname: newUser.surname,
-      //   //     email: newUser.email,
-      //   //     password: newUser.password
-      //   //   },
-          
-      // ];        
+      this.UserService.createUser({
+        name: newUser.name,
+        surname: newUser.surname,
+        email:newUser.email,
+        password: newUser.password
+      });
+  
       this.UserService.sendNotification('Se cargo el usuario');
     } else{}
   }
@@ -57,9 +58,9 @@ onCreateUser(): void {
 }
 
 onDeleteUser(userToDelete: User): void {
-console.log(userToDelete);
   if (confirm(`¿Realmente quiere eliminar a ${userToDelete.surname}, ${userToDelete.name}?`)){
-    
+     this.UserService.deleteUserById(userToDelete.id);
+     this.UserService.sendNotification('Se elimino el ususario');
   }
 }
 
@@ -71,12 +72,11 @@ onEditUser(userToEdit: User): void {
   .afterClosed()
   .subscribe({
     next: (userUpdated) => {
-      console.log(userUpdated);
-    if (userUpdated) {}
-
-  },
-  });
-  
+      if (userUpdated){
+        this.UserService.updateUserById(userToEdit.id, userUpdated);
+        this.UserService.sendNotification('Ususario editado');
+      }
+    },
+  }); 
 }
-
 }
