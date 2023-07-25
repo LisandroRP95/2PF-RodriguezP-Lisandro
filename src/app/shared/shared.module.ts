@@ -11,6 +11,8 @@ import { MatTableModule } from '@angular/material/table';
 import { FullNamePipe } from './pipes/full-name.pipe';
 import { ControlErrorMessagePipe } from './pipes/control-error-message.pipe';
 import { TitleSizeDirective } from './directives/title-size.directive';
+import {MatListModule} from '@angular/material/list';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { TitleSizeDirective } from './directives/title-size.directive';
     MatTableModule,
     FullNamePipe,
     ControlErrorMessagePipe,
-    TitleSizeDirective
+    TitleSizeDirective,
+    MatListModule
   ]
 })
 export class SharedModule { }

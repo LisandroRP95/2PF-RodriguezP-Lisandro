@@ -1,13 +1,12 @@
 <mat-drawer-container class="example-container" autosize>
     <!--SIDEBAR-->
     <mat-drawer #drawer class="example-sidenav" mode="side">
-        <ul>
-            <li><a href="">Inicio</a></li><br>
-            <li><a href="">Cursos</a></li><br>
-            <li><a href="">Calificaciones</a></li><br>
-            <li><a href="">Asistencias</a></li><br>
-        </ul>
-        <p *ngIf="showFiller">Aqui vera el texto extra.</p>
+        <mat-nav-list>
+            <a routerLink="home" mat-list-item>Inicio</a>
+            <a routerLink="users" mat-list-item>Usuarios</a>
+            <a mat-list-item>Calificaciones</a>
+            <a routerLink="/auth" mat-list-item>Cerrar Sesion</a>
+          </mat-nav-list>
     </mat-drawer>
     <!--FIN SIDEBAR-->
 
@@ -20,13 +19,12 @@
                 (click)="drawer.toggle()">
                 <mat-icon>menu</mat-icon>
             </button>
-            <span appTitleSize>Programación Reactiva - Rodriguez Peña Lisandro - Angular</span>
+            <span appTitleSize>Pre Entrega 2 - Rodriguez Peña Lisandro - Angular</span>
         </mat-toolbar>
         <!--FIN TOOLBAR-->
 
         <main class="p-3">
-            <app-home></app-home>
-            <app-users></app-users>
+            <router-outlet></router-outlet>
         </main>
     </div>
 
