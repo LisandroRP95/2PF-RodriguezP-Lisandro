@@ -2,10 +2,7 @@
     <!--SIDEBAR-->
     <mat-drawer #drawer class="example-sidenav" mode="side">
         <mat-nav-list>
-            <a routerLink="home" mat-list-item>Inicio</a>
-            <a routerLink="users" mat-list-item>Usuarios</a>
-            <a mat-list-item>Calificaciones</a>
-            <a routerLink="/auth" mat-list-item>Cerrar Sesion</a>
+            <app-nav-menu></app-nav-menu>
           </mat-nav-list>
     </mat-drawer>
     <!--FIN SIDEBAR-->
@@ -14,13 +11,7 @@
     <div class="example-sidenav-content">
 
         <!--TOOLBAR-->
-        <mat-toolbar>
-            <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
-                (click)="drawer.toggle()">
-                <mat-icon>menu</mat-icon>
-            </button>
-            <span appTitleSize>Pre Entrega 2 - Rodriguez Peña Lisandro - Angular</span>
-        </mat-toolbar>
+        <app-toolbar [drawer]="drawer"></app-toolbar>
         <!--FIN TOOLBAR-->
 
         <main class="p-3">

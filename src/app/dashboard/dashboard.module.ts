@@ -9,11 +9,17 @@ import { HomeModule } from './pages/home/home.module';
 import { UsersModule } from './pages/users/users.module';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { ToolbarComponent } from './layout/toolbar/toolbar.component';
+import { NavMenuComponent } from './layout/nav-bar/nav-menu.component';
+
 
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+    NavMenuComponent,
+    ToolbarComponent
+  
   ],
   imports: [
     CommonModule,
