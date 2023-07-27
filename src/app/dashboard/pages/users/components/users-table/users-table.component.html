@@ -25,6 +25,11 @@
     <th mat-header-cell *matHeaderCellDef> Acciones </th>
     <td mat-cell *matCellDef="let user">
 
+      <!-- Boton de visibilidad -->
+      <button [routerLink]="user.id" mat-icon-button color="primary">
+        <mat-icon>visibility</mat-icon>
+      </button>
+
       <!-- Boton de editar -->
       <button (click)="editUser.emit(user)" mat-icon-button color="primary">
         <mat-icon>edit</mat-icon>
