@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UserFormDialogComponent } from './components/user-form-dialog/user-form-dialog.component';
 import { User } from './models';
-import { UserService } from '../user/user.service';
+import { UserService } from './user.service';
 import { NotifierService } from 'src/app/core/services/notifier.service';
 import { Observable, map, tap } from 'rxjs';
 

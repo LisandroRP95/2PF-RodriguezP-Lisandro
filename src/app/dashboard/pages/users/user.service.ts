@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Subject, BehaviorSubject, Observable, of, delay, take } from 'rxjs';
-import { CreateUserData, UpdateUserData, User } from '../users/models/index';
+import { Subject, BehaviorSubject, Observable, of, delay, take, map } from 'rxjs';
+import { CreateUserData, UpdateUserData, User } from './models/index';
 import { NotifierService } from 'src/app/core/services/notifier.service';
 import Swal from 'sweetalert2';
 
@@ -20,6 +20,7 @@ const USER_DB: Observable<User[]> = of([
 export class UserService {
 
   private users$ = new BehaviorSubject<User[]>([]);
+  private _users$ = this.users$.asObservable();
 
   private sendNotification$ = new Subject<string>();
 
@@ -50,6 +51,13 @@ export class UserService {
 
   getUsers(): Subject<User[]> {
     return this.users$;
+  }
+
+  getUserById(id: number): Observable<User | undefined> {
+    return this._users$.pipe(
+      map((users) => users.find((u) => u.id === id)),
+      take(1),
+      )
   }
 
   createUser(user: CreateUserData): void {

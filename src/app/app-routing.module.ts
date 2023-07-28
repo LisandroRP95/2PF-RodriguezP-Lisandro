@@ -7,6 +7,9 @@ import { UsersComponent } from './dashboard/pages/users/users.component';
 import { UserDetailComponent } from './dashboard/pages/users/pages/user-detail/user-detail.component';
 import { LoginComponent } from './auth/pages/login/login.component';
 import { RegisterComponent } from './auth/pages/register/register.component';
+import { StudentsComponent } from './dashboard/pages/students/students.component';
+import { CoursesComponent } from './dashboard/pages/courses/courses.component';
+import { InscriptionsComponent } from './dashboard/pages/inscriptions/inscriptions.component';
 
 const routes: Routes = [
   {
@@ -17,20 +20,25 @@ const routes: Routes = [
         path: 'home',
         component: HomeComponent
       },
-
       {
         path: 'users',
         component: UsersComponent,
-        children:[ 
-          {
-            path: '',
-            component: UsersComponent
-          },
-          {
-            path: ':idUser',
-            component: UserDetailComponent
-          }
-        ]
+      },
+      {
+        path: 'users/:id',
+        component: UserDetailComponent
+      },
+      {
+        path: 'students',
+        component: StudentsComponent
+      },
+      {
+        path: 'courses',
+        component: CoursesComponent
+      },
+      {
+        path: 'inscriptions',
+        component: InscriptionsComponent
       },
       {
         path: '**',
