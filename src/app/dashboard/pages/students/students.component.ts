@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 import { Student } from './models/index';
 import { StudentsService } from './students.service';
 import { Observable } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { StudentFormDialogComponent } from './student-form-dialog/student-form-dialog.component';
 
 @Component({
   selector: 'app-students',
@@ -13,20 +15,63 @@ export class StudentsComponent implements OnInit{
   public data$: Observable<Student[]>;
   public displayedColumns = ['id','name', 'surname','birthYear', 'actions'];
 
-  constructor(private studentsService: StudentsService) {
-    this.data$ = this.studentsService.getStudents();
+  @Input()
+
+
+  @Output()
+  deleteStudent = new EventEmitter<Student>();
+
+  @Output()
+  editStudent = new EventEmitter<Student>();
+
+  constructor(
+    private StudentsService: StudentsService,
+    private MatDialog: MatDialog) {
+    this.data$ = this.StudentsService.getStudents();
   }
 
   ngOnInit(): void {
-    this.studentsService.loadStudents();
-    this.studentsService.getStudents().subscribe();
+    this.StudentsService.loadStudents();
+    this.StudentsService.getStudents().subscribe();
   }
 
   onCreateStudent(): void{
-    this.studentsService.createStudent();
+    const dialogRef = this.MatDialog.open(StudentFormDialogComponent);
+
+    dialogRef.afterClosed().subscribe({
+      next: (newStudent) => {
+        if (newStudent){
+          this.StudentsService.createStudent({
+            name: newStudent.name,
+            surname: newStudent.surname,
+            birthYear: newStudent.birthYear
+          });
+        
+        } else {}
+      },
+    });
+    this.StudentsService.sendNotification('Se cargo el alumno');
   }
 
   onDeleteStudent(id: number): void{
-    this.studentsService.deleteStudent(id);
+    this.StudentsService.deleteStudent(id);
+    this.StudentsService.sendNotification('Se elimino el almuno');
   }
+
+
+  onEditStudent(studentToEdit: Student): void {
+  this.MatDialog.open(StudentFormDialogComponent, {
+    data: studentToEdit
+  })
+  
+  .afterClosed()
+  .subscribe({
+    next: (studentUpdated) => {
+      if (studentUpdated){
+        this.StudentsService.updateStudentById(studentToEdit.id, studentUpdated);
+        this.StudentsService.sendNotification('Ususario editado');
+      }
+    },
+  }); 
+}
 }

@@ -24,7 +24,7 @@ export class UserService {
 
   private sendNotification$ = new Subject<string>();
 
-  constructor(private nofitier: NotifierService) {
+  constructor() {
     
     
     this.sendNotification$.subscribe({
