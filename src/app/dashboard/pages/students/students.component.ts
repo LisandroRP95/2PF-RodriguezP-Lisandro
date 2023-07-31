@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output,EventEmitter, Inject } from '@angular/core';
 import { Student } from './models/index';
 import { StudentsService } from './students.service';
 import { Observable } from 'rxjs';
@@ -16,7 +16,7 @@ export class StudentsComponent implements OnInit{
   public displayedColumns = ['id','name', 'surname','birthYear', 'actions'];
 
   @Input()
-
+  dataSource2: Student[] = [];
 
   @Output()
   deleteStudent = new EventEmitter<Student>();
@@ -26,9 +26,11 @@ export class StudentsComponent implements OnInit{
 
   constructor(
     private StudentsService: StudentsService,
+    @Inject('IS_DEV') private isDev: boolean,
     private MatDialog: MatDialog) {
     this.data$ = this.StudentsService.getStudents();
   }
+
 
   ngOnInit(): void {
     this.StudentsService.loadStudents();
@@ -50,14 +52,12 @@ export class StudentsComponent implements OnInit{
         } else {}
       },
     });
-    this.StudentsService.sendNotification('Se cargo el alumno');
   }
 
   onDeleteStudent(id: number): void{
     this.StudentsService.deleteStudent(id);
     this.StudentsService.sendNotification('Se elimino el almuno');
   }
-
 
   onEditStudent(studentToEdit: Student): void {
   this.MatDialog.open(StudentFormDialogComponent, {

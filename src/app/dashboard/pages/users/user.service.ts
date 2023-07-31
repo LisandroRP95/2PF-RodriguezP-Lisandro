@@ -83,8 +83,10 @@ export class UserService {
 
   deleteUserById(id: number): void {
     this.users$.pipe(take(1)).subscribe({
-      next: (currentArray) => this.users$.next(currentArray.filter((user) => user.id !== id)),
-    })
-  }
+      next: (currentArray) => {
+        this.users$.next(
+        currentArray.filter((user) => user.id !== id));
+    }
+  })
 }
-
+}

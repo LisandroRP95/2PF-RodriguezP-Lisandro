@@ -10,6 +10,7 @@ import { RegisterComponent } from './auth/pages/register/register.component';
 import { StudentsComponent } from './dashboard/pages/students/students.component';
 import { CoursesComponent } from './dashboard/pages/courses/courses.component';
 import { InscriptionsComponent } from './dashboard/pages/inscriptions/inscriptions.component';
+import { StudentDetailComponent } from './dashboard/pages/students/student-detail/student-detail.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
       {
         path: 'students',
         component: StudentsComponent
+      },
+      {
+        path: 'students/:id',
+        component: StudentDetailComponent
       },
       {
         path: 'courses',

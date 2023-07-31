@@ -8,7 +8,6 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { AuthModule } from './auth/auth.module';
 import { CoursesModule } from './dashboard/pages/courses/courses.module';
 import { StudentsModule } from './dashboard/pages/students/students.module';
-import { InscriptionsComponent } from './dashboard/pages/inscriptions/inscriptions.component';
 import { InscriptionsModule } from './dashboard/pages/inscriptions/inscriptions.module';
 
 @NgModule({

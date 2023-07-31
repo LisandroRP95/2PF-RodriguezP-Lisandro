@@ -14,11 +14,13 @@ import { NavMenuComponent } from './layout/nav-bar/nav-menu.component';
 
 
 
+
 @NgModule({
   declarations: [
     DashboardComponent,
     NavMenuComponent,
-    ToolbarComponent
+    ToolbarComponent,
+
   
   ],
   imports: [
