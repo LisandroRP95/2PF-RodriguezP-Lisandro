@@ -1,1 +1,59 @@
 <h1 appTitleSize>Cursos</h1>
+
+<button (click)="onCreateCourses()" mat-flat-button color="primary" type="button">
+    <mat-icon>add</mat-icon>
+    Agregar Curso
+</button>
+
+<table mat-table [dataSource]="data$" class="mat-elevation-z8">
+
+    <!-- Columna ID de curso -->
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let course"> {{course.id}} </td>
+    </ng-container>
+    <!-- Columna Nombre de Curso -->
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Curso </th>
+        <td mat-cell *matCellDef="let course"> {{course.name}} </td>
+    </ng-container>
+    <!-- Columna Descripción del Curso -->
+    <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Descripción </th>
+        <td mat-cell *matCellDef="let course"> {{course.description}} </td>
+    </ng-container>
+    <!-- Columna Codigo de curso -->
+    <ng-container matColumnDef="courseCode">
+        <th mat-header-cell *matHeaderCellDef> Código </th>
+        <td mat-cell *matCellDef="let course"> {{course.courseCode}} </td>
+    </ng-container>
+   <!-- Columna Acciones -->
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <td mat-cell *matCellDef="let course">
+
+            <!-- Boton Visualizar -->
+            <button [routerLink]="course.id" mat-icon-button color="primary">
+                <mat-icon>visibility</mat-icon>
+            </button>
+            
+            <!-- Boton Editar -->
+            <button (click)="onEditCourse(course.id)" mat-icon-button color="primary">
+                <mat-icon>edit</mat-icon>
+            </button>
+            
+            <!-- Boton Borrar -->
+            <button (click)="onDeleteCourse(course.id)" mat-icon-button color="warn">
+                <mat-icon>delete</mat-icon>
+            </button>
+            
+
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
+
+

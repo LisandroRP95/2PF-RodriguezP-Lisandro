@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Student } from '../models';
 import { StudentsService } from '../students.service';
-import { User } from '../../users/models/index';
 
 @Component({
   selector: 'app-student-detail',
@@ -34,7 +33,7 @@ constructor(
 loadStudent(): void{
   if(this.studentId){
     this.StudentsService.getStudentbyId(this.studentId).subscribe({
-      next: (user) => (user),
+      next: (student) => student
       
     })
   }

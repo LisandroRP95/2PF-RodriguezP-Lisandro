@@ -1,0 +1,46 @@
+<h1 mat-dialog-title>
+    {{editingCourse 
+    ? 'Editar Curso ' + editingCourse.name  
+    :'Crear Curso' 
+}}
+</h1>
+
+<div mat-dialog-content>
+    <form [formGroup]="courseForm" class="grid">
+        <div class="col-6 field">
+            <mat-form-field class="w-full" appearance="outline">
+                <mat-label>Curso</mat-label>
+                <input formControlName="name" matInput type="text" name="name">
+                <mat-error *ngFor="let error of nameControl.errors | keyvalue ">
+                    {{ error | controlErrorMessage}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="col-6 field">
+            <mat-form-field class="w-full" appearance="outline">
+                <mat-label>Código de Curso</mat-label>
+                <input formControlName="courseCode" matInput type="text" name="courseCode">
+                <mat-error *ngFor="let error of descriptionControl.errors | keyvalue ">
+                    {{ error | controlErrorMessage}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="col-12 field">
+            <mat-form-field class="w-full" appearance="outline">
+                <mat-label>Descripción</mat-label>
+                <input formControlName="description" matInput type="number" name="description">
+                <mat-error *ngFor="let error of courseCodeControl.errors | keyvalue ">
+                    {{ error | controlErrorMessage}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+    </form>
+
+</div>
+<div mat-dialog-actions class="col-12 flex justify-content-end">
+    <button mat-button mat-dialog-close>cancelar</button>
+    <button (click)="onSubmit()" type="submit" mat-button>Guardar</button>
+</div>

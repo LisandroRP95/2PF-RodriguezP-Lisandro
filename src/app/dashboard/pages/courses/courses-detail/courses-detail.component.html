@@ -1,0 +1,20 @@
+<h1 appTitleSize>Curso</h1>
+
+<button routerLink=".." mat-icon-button>
+    <mat-icon>arrow_back</mat-icon>
+</button>
+
+
+    <mat-card  class="example-card">
+        <mat-card-header>
+          <mat-card-title-group>
+            <mat-card-title> ID: {{courseId}} Nombre:  {{ course?.name }} </mat-card-title>
+            <mat-card-subtitle>Codigo de curso: {{ course?.courseCode }}</mat-card-subtitle>
+            <img mat-card-md-image src="https://img.freepik.com/vector-premium/logotipo-educacion-linea-icono-pegatina-vector-curso-e-learning-casa-estudio-linea-educacion-distancia-libros-electronicos-banner-examen-distancia-vector-sobre-fondo-aislado-eps-10_399089-1128.jpg?w=1800"  alt="Default profile picture">
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content>
+         Descripción {{ course?.description }}
+        </mat-card-content>
+      </mat-card>
+ 
