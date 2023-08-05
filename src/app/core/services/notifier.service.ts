@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import Swal from 'sweetalert2';
 import { Subject } from 'rxjs';
+import Swal from 'sweetalert2';
 
 interface MyCustomNotification {
   type: 'success' | 'error' | 'info';
   title: string;
-  message: string
+  message: string;
 }
 
 @Injectable({
@@ -17,18 +17,23 @@ export class NotifierService {
 
   constructor() {
     this.notifier$.subscribe({
-      next: (myNotification) =>{
-        Swal.fire(myNotification.title, myNotification.message, myNotification.type)
+      next: (myNotification) => {
+        Swal.fire(myNotification.title, myNotification.message, myNotification.type);
       }
     })
   }
-
-  showSuccess(message: string, title: 'Existoso'): void{
+  showSuccess(message: string, title = 'Realizado'): void {
     this.notifier$.next({
       type: 'success',
-      title,
       message,
-
+      title
+    });
+  }
+  showError(message: string, title = 'Error'): void {
+    this.notifier$.next({
+      type: 'error',
+      message,
+      title
     });
   }
 }
