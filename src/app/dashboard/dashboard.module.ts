@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { ToolbarComponent } from './layout/toolbar/toolbar.component';
 import { NavMenuComponent } from './layout/nav-bar/nav-menu.component';
+import { DashboardRoutingModule } from './dashboard-routing.module';
 
 
 
@@ -25,6 +26,7 @@ import { NavMenuComponent } from './layout/nav-bar/nav-menu.component';
   ],
   imports: [
     CommonModule,
+    DashboardRoutingModule,
     MatSidenavModule,
     MatButtonModule,
     MatToolbarModule,
@@ -32,7 +34,8 @@ import { NavMenuComponent } from './layout/nav-bar/nav-menu.component';
     HomeModule,
     UsersModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+
   ],
   exports: [
     DashboardComponent

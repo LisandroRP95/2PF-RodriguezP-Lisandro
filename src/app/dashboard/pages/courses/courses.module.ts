@@ -5,6 +5,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { CoursesFormDialogComponent } from './courses-form-dialog/courses-form-dialog.component';
 import { CoursesDetailComponent } from './courses-detail/courses-detail.component';
 import { RouterModule } from '@angular/router';
+import { CoursesRoutingModule } from './courses-routing.module';
 
 
 
@@ -16,6 +17,7 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
+    CoursesRoutingModule,
     SharedModule,
     RouterModule
   ],

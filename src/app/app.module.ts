@@ -4,8 +4,6 @@ import { CoursesModule } from './dashboard/pages/courses/courses.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DashboardModule } from './dashboard/dashboard.module';
-import { AuthModule } from './auth/auth.module';
 import { StudentsModule } from './dashboard/pages/students/students.module';
 import { InscriptionsModule } from './dashboard/pages/inscriptions/inscriptions.module';
 
@@ -17,8 +15,6 @@ import { InscriptionsModule } from './dashboard/pages/inscriptions/inscriptions.
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    DashboardModule,
-    AuthModule,
     CoursesModule,
     StudentsModule,
     InscriptionsModule
