@@ -5,7 +5,16 @@
       "surname": "Rodriguez Peña",
       "email": "lrp@mail.com",
       "password": "1234",
+      "token": "OrFJbZW23w9VoEilRAFj",
       "id": 1
+    },
+    {
+      "name": "Josn",
+      "surname": "Json",
+      "email": "json@mail.com",
+      "password": "223455",
+      "token": "OrFJbZWIKw9VoEilRAFj",
+      "id": 2
     }
   ],
   "students": []

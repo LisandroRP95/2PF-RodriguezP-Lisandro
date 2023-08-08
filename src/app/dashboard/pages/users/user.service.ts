@@ -4,7 +4,8 @@ import { CreateUserData, UpdateUserData, User } from './models/index';
 import Swal from 'sweetalert2';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NotifierService } from 'src/app/core/services/notifier.service';
-
+import { generateRandomString } from 'src/app/shared/utils/helpers';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,7 @@ export class UserService {
 
   loadUsers(): void {
     this._isLoading$.next(true);
-    this.httpClient.get<User[]>('http://localhost:3000/users', {
+    this.httpClient.get<User[]>(environment.baseApiUrl + '/users', {
       headers: new HttpHeaders({
         'token': 'carga de listado'
       }),
@@ -69,7 +70,10 @@ export class UserService {
   }
 
   createUser(payload: CreateUserData): void {
-    this.httpClient.post<User>('http://localhost:3000/users', payload)
+
+    const token = generateRandomString(20);
+
+    this.httpClient.post<User>(environment.baseApiUrl + '/users', {...payload, token })
     .pipe(
       mergeMap((createdUser) => this.users$.pipe(
         take(1),
@@ -86,21 +90,13 @@ export class UserService {
     }
 
   updateUserById(id: number, updatedUser: UpdateUserData): void {
-  //  this._users$.pipe(take(1)).subscribe({
-  //     next: (currentArray) => {
-  //       this._users$.next(
-  //         currentArray.map((user) => user.id === id? {...user, ...updatedUser} : user)
-  //       );
-  //     },
-  //  });
-
-  this.httpClient.put('http://localhost:3000/users/' + id, updatedUser).subscribe({
-    next: () => this.loadUsers(),
-  })
-  }
+    this.httpClient.put(environment.baseApiUrl + '/users/' + id, updatedUser).subscribe({
+      next: () => this.loadUsers(),
+    })
+    }
 
   deleteUserById(id: number): void {
-    this.httpClient.delete('http://localhost:3000/users/' + id)
+    this.httpClient.delete(environment.baseApiUrl + 'users/' + id)
     .pipe(
       mergeMap(
         (deletedUserResponse) => this.users$.pipe(
