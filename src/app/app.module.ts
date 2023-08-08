@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentsModule } from './dashboard/pages/students/students.module';
 import { InscriptionsModule } from './dashboard/pages/inscriptions/inscriptions.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { InscriptionsModule } from './dashboard/pages/inscriptions/inscriptions.
     BrowserAnimationsModule,
     CoursesModule,
     StudentsModule,
-    InscriptionsModule
+    InscriptionsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

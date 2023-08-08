@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { UserFormDialogComponent } from './components/user-form-dialog/user-form-dialog.component';
 import { User } from './models';
 import { UserService } from './user.service';
-import { NotifierService } from 'src/app/core/services/notifier.service';
 import { Observable, map } from 'rxjs';
 
 
@@ -13,16 +12,9 @@ import { Observable, map } from 'rxjs';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent {
-
 public users: Observable<User[]>;
 
-constructor(
-  private matDialog: MatDialog,
-  private UserService: UserService,
-  private nofitier: NotifierService,
-  @Inject('IS_DEV') private isDev: boolean,
-  ) {
-
+constructor(private matDialog: MatDialog, private UserService: UserService) {
     this.users = this.UserService.getUsers().pipe(
     map((valorOriginal) =>
     valorOriginal.map((usuario)=>({
@@ -34,6 +26,7 @@ constructor(
     );
 
     this.UserService.loadUsers();
+    
   }
 
 onCreateUser(): void {

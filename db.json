@@ -1,0 +1,12 @@
+{
+  "users": [
+    {
+      "name": "Lisandro",
+      "surname": "Rodriguez Peña",
+      "email": "lrp@mail.com",
+      "password": "1234",
+      "id": 1
+    }
+  ],
+  "students": []
+}
