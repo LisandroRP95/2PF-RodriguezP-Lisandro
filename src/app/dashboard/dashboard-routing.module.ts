@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { InscriptionsComponent } from './pages/inscriptions/inscriptions.component';
+import { NotFoundComponent } from '../not-found/not-found.component';
 
 @NgModule({
     imports: [
@@ -28,7 +29,7 @@ import { InscriptionsComponent } from './pages/inscriptions/inscriptions.compone
             },
             {
                 path: '**',
-                redirectTo: 'home',
+                component: NotFoundComponent,
             },
         ]),
     ],

@@ -12,6 +12,7 @@ import { FullNamePipe } from './pipes/full-name.pipe';
 import { ControlErrorMessagePipe } from './pipes/control-error-message.pipe';
 import { TitleSizeDirective } from './directives/title-size.directive';
 import { MatListModule } from '@angular/material/list';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { MatListModule } from '@angular/material/list';
     FullNamePipe,
     ControlErrorMessagePipe,
     TitleSizeDirective,
-    MatListModule
+    MatListModule,
+    MatProgressBarModule
   ]
 })
 export class SharedModule { }
