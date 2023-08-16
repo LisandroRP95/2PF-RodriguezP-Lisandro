@@ -46,7 +46,7 @@ export class AuthService {
                 if (response.length) { 
                     const authUser = response[0];
                     this._authUser$.next(authUser);
-                    this.router.navigate(['/dashboard']);
+                    this.router.navigate(['/dashboard/home']);
                     localStorage.setItem('token', authUser.token);
                 }else{
                     this.notifier.showError('Dirección email inválida');

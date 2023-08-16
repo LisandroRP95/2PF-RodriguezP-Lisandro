@@ -11,6 +11,7 @@ import { StudentFormDialogComponent } from './student-form-dialog/student-form-d
   styleUrls: ['./students.component.scss']
 })
 export class StudentsComponent implements OnInit{
+  title = 'Componente-de-Alumnos';
   public dataSource: Student[] = [];
   public data$: Observable<Student[]>;
   public displayedColumns = ['id','name', 'surname','birthYear', 'actions'];
@@ -26,7 +27,6 @@ export class StudentsComponent implements OnInit{
 
   constructor(
     private StudentsService: StudentsService,
-    @Inject('IS_DEV') private isDev: boolean,
     private MatDialog: MatDialog) {
     this.data$ = this.StudentsService.getStudents();
   }

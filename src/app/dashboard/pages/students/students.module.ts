@@ -22,11 +22,7 @@ import { StudentsRoutingModule } from './students-routing.module';
     SharedModule,
     RouterModule
   ],
-  providers: [
-    {
-      provide: 'IS_DEV',
-      useValue: true,
-    } 
+  providers: [ 
   ]
 })
 export class StudentsModule { }
