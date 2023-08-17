@@ -15,7 +15,32 @@
       "password": "223455",
       "token": "OrFJbZWIKw9VoEilRAFj",
       "id": 2
+    },
+    {
+      "name": "No me anda",
+      "surname": "como quiero",
+      "birthYear": 12222,
+      "id": 3
     }
   ],
-  "students": []
+  "students": [
+    {
+      "id": 1,
+      "name": "Lisandro",
+      "surname": "Rodriguez Peña",
+      "birthYear": 1995
+    },
+    {
+      "id": 2,
+      "name": "Pedro",
+      "surname": "Parquero",
+      "birthYear": 1962
+    },
+    {
+      "id": 3,
+      "name": "Bruno",
+      "surname": "Dias",
+      "birthYear": 1940
+    }
+  ]
 }

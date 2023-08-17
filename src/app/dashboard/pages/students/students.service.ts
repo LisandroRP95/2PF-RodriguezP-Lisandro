@@ -1,40 +1,25 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, take, Subject, map } from 'rxjs';
+import { BehaviorSubject, Observable, of, take, Subject, map, mergeMap } from 'rxjs';
 import { CreateStudentData, Student, UpdateStudentData } from './models';
 import Swal from 'sweetalert2';
+import { NotifierService } from 'src/app/core/services/notifier.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
-const STUDENT_DB: Observable<Student[]> = of([
-  {
-    id: 1,
-    name: 'Lisandro',
-    surname: 'Rodriguez',
-    birthYear: 1995,
-  },
-  {
-    id: 2,
-    name: 'Pedro',
-    surname: 'Parquero',
-    birthYear: 1962,
-  },
-  {
-    id: 3,
-    name: 'Bruno',
-    surname: 'Dias',
-    birthYear: 1940,
-  },
-])
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentsService {
 
-  private students$ = new BehaviorSubject<Student[]>([]);
-  private _students$ = this.students$.asObservable();
+  private _students$ = new BehaviorSubject<Student[]>([]);
+  private students$ = this._students$.asObservable();
 
   private sendNotifications$ = new Subject<string>();
+  private _isLoading$ = new BehaviorSubject(false);
+  public isLoading$ = this._isLoading$.asObservable();
 
-  constructor() {
+  constructor(private notifier: NotifierService, private httpClient: HttpClient) {
     this.sendNotifications$.subscribe({
       next: (message) =>
       Swal.fire({
@@ -52,50 +37,71 @@ export class StudentsService {
   }
 
   loadStudents(): void {
-    STUDENT_DB.subscribe({
-      next: (studentFromDb) => this.students$.next(studentFromDb)
-    });
+    this._isLoading$.next(true);
+    this.httpClient.get<Student[]>(environment.baseApiUrl + '/students', {
+      headers: new HttpHeaders({
+        'token': 'carga listado alumnos'
+      }),
+    }).subscribe({
+      next: (response) => {
+        this._students$.next(response);
+      },
+      error: () => {
+        this.notifier.showError('Error al cargar los alumnos');
+      },
+      complete: () => {
+        this._isLoading$.next(false);
+      }
+    })
+  
   }
 
   getStudents(): Subject<Student[]> {
-    return this.students$;
+    return this._students$;
   }
 
   getStudentbyId(id: number): Observable<Student | undefined> {
-    return this._students$.pipe(
+    return this.students$.pipe(
       map((students) => students.find((s) => s.id === id)),
       take(1),
     )
   }
 
   createStudent(student: CreateStudentData): void {
-    this.students$.pipe(take(1)).subscribe({
-      next: (arrayActual) => {
-        this.students$.next([
-          ...arrayActual,
-          {...student, id: arrayActual.length + 1},
-        ]);
-      },
-    });
+    this.httpClient.post<Student>(environment.baseApiUrl + '/users', {...student })
+    .pipe(
+      mergeMap((createdStudent) => this.students$.pipe(
+        take(1),
+        map(
+          (currentArray) => [...currentArray, createdStudent])
+        )
+      )
+    )
+    .subscribe({
+      next: (updatedArray) => {
+        this._students$.next(updatedArray);
+      }
+      })
   }
 
   updateStudentById(id: number, updatedStudent: UpdateStudentData): void {
-    this.students$.pipe(take(1)).subscribe({
-      next: (arrayActual) => {
-        this.students$.next(
-          arrayActual.map((student) => student.id === id? {...student, ...updatedStudent} : student)
-        );
-      },
+    this.httpClient.put(environment.baseApiUrl + '/students/' + id, updatedStudent).subscribe({
+      next: () => this.loadStudents(),
     })
   }
 
 
   deleteStudent(id: number): void{
-    this.students$.pipe(take(1)).subscribe({
-      next: (arrayActual) => {
-        this.students$.next(
-          arrayActual.filter((student) => student.id !== id));
-      }
+    this.httpClient.delete(environment.baseApiUrl + 'students/' + id)
+    .pipe(
+      mergeMap(
+        (deletedUserResponse) => this.students$.pipe(
+          take(1),
+          map((curentArray) => curentArray.filter((student) => student.id !== id))
+        )
+      )
+    ).subscribe({
+      next: (updatedArray) => this._students$.next(updatedArray),
     })
   }
 }
