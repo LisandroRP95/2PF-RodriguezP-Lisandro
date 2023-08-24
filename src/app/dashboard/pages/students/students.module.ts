@@ -10,11 +10,12 @@ import { StudentsRoutingModule } from './students-routing.module';
 
 
 
+
 @NgModule({
   declarations: [
     StudentsComponent,
     StudentFormDialogComponent,
-    StudentDetailComponent,
+    StudentDetailComponent
   ],
   imports: [
     CommonModule,

@@ -25,7 +25,7 @@ import { NotFoundComponent } from '../not-found/not-found.component';
             },
             {
                 path: 'inscriptions',
-                component: InscriptionsComponent,
+                loadChildren: () => import('./pages/inscriptions/inscriptions.module').then((typescriptModule) => typescriptModule.InscriptionsModule)
             },
             {
                 path: '**',
