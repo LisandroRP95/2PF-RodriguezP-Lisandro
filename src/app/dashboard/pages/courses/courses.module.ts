@@ -6,6 +6,10 @@ import { CoursesFormDialogComponent } from './courses-form-dialog/courses-form-d
 import { CoursesDetailComponent } from './courses-detail/courses-detail.component';
 import { RouterModule } from '@angular/router';
 import { CoursesRoutingModule } from './courses-routing.module';
+import { EffectsModule } from '@ngrx/effects';
+import { CoursesEffects } from './store/courses.effects';
+import { StoreModule } from '@ngrx/store';
+import { coursesFeature } from './store/courses.reducer';
 
 
 
@@ -19,7 +23,9 @@ import { CoursesRoutingModule } from './courses-routing.module';
     CommonModule,
     CoursesRoutingModule,
     SharedModule,
-    RouterModule
+    RouterModule,
+    StoreModule.forFeature(coursesFeature),
+    EffectsModule.forFeature([CoursesEffects]) 
   ],
   providers: [
     {

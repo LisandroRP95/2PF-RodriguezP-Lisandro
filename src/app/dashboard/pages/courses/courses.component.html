@@ -5,7 +5,7 @@
     Agregar Curso
 </button>
 
-<table mat-table [dataSource]="data$" class="mat-elevation-z8">
+<table mat-table [dataSource]="(courses$ | async) || []" class="mat-elevation-z8">
 
     <!-- Columna ID de curso -->
     <ng-container matColumnDef="id">

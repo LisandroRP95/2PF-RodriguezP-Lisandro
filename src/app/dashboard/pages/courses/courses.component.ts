@@ -4,6 +4,9 @@ import { CoursesService } from './courses.service';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { CoursesFormDialogComponent } from './courses-form-dialog/courses-form-dialog.component';
+import { Store } from '@ngrx/store';
+import { CoursesActions } from './store/courses.actions';
+import { selectCoursesArray } from './store/courses.selectors';
 
 @Component({
   selector: 'app-courses',
@@ -12,8 +15,9 @@ import { CoursesFormDialogComponent } from './courses-form-dialog/courses-form-d
   ]
 })
 export class CoursesComponent  implements OnInit{
+    courses$: Observable<Course[]>;
     public dataSource: Course[] = [];
-    public data$: Observable<Course[]>;
+    // public data$: Observable<Course[]>;
     public displayedColumns = ['id','name', 'description','courseCode', 'actions'];
   
     @Input()
@@ -27,15 +31,18 @@ export class CoursesComponent  implements OnInit{
   
     constructor(
       private CoursesService: CoursesService,
-      
+      private store: Store,
       private MatDialog: MatDialog) {
-      this.data$ = this.CoursesService.getCourses();
+      
+      this.courses$ = this.store.select(selectCoursesArray);
+      // this.data$ = this.CoursesService.getCourses();
     }
   
   
     ngOnInit(): void {
-      this.CoursesService.loadCourses();
-      this.CoursesService.getCourses().subscribe();
+      this.store.dispatch(CoursesActions.loadCourses())
+      // this.CoursesService.loadCourses();
+      // this.CoursesService.getCourses().subscribe();
     }
   
     onCreateCourses(): void{

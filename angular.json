@@ -54,7 +54,8 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environments.ts",
-                  "with": "src/environments/environments.prod.ts"}
+                  "with": "src/environments/environments.prod.ts"
+                }
               ]
             },
             "development": {
@@ -110,6 +111,9 @@
     }
   },
   "cli": {
-    "analytics": "fd40f431-ce6b-421e-9e0d-41e171c9bd4d"
+    "analytics": "fd40f431-ce6b-421e-9e0d-41e171c9bd4d",
+    "schematicCollections": [
+      "@ngrx/schematics"
+    ]
   }
 }
