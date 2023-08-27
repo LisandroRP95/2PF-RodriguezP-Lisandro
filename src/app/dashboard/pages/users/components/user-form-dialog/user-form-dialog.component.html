@@ -1,8 +1,8 @@
 <h1 mat-dialog-title>
-    {{editingUser 
-    ? 'Editar usuario ' + editingUser.name + ' ' + editingUser.surname 
-    :'Crear Usuario' 
-}}
+    {{editingUser
+    ? 'Editar usuario ' + editingUser.name + ' ' + editingUser.surname
+    :'Crear Usuario'
+    }}
 </h1>
 <div mat-dialog-content>
     <form [formGroup]="userForm" class="grid">
@@ -43,6 +43,16 @@
                 <mat-error *ngFor="let error of passwordControl.errors | keyvalue ">
                     {{ error | controlErrorMessage}}
                 </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="col-12 field">
+            <mat-form-field class="w-full">
+                <mat-label>Rol</mat-label>
+                <mat-select [formControl]="roleControl">
+                    <mat-option value="ADMINISTRADOR">Administrador</mat-option>
+                    <mat-option value="USUARIO">Usuario</mat-option>
+                </mat-select>
             </mat-form-field>
         </div>
     </form>

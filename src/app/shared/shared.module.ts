@@ -12,7 +12,8 @@ import { FullNamePipe } from './pipes/full-name.pipe';
 import { ControlErrorMessagePipe } from './pipes/control-error-message.pipe';
 import { TitleSizeDirective } from './directives/title-size.directive';
 import { MatListModule } from '@angular/material/list';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     ControlErrorMessagePipe,
     TitleSizeDirective,
     MatListModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSelectModule
   ]
 })
 export class SharedModule { }

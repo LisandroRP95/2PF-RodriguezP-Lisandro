@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { InscriptionsComponent } from './pages/inscriptions/inscriptions.component';
 import { NotFoundComponent } from '../not-found/not-found.component';
+import { adminGuard } from '../core/guards/admin.guard';
 
 @NgModule({
     imports: [
@@ -13,6 +14,7 @@ import { NotFoundComponent } from '../not-found/not-found.component';
             },
             {
                 path: 'users',
+                canActivate: [adminGuard],
                 loadChildren: () => import('./pages/users/users.module').then((typescriptModule) => typescriptModule.UsersModule)
             },
             {

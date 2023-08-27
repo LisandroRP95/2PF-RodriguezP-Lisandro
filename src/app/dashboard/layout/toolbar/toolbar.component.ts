@@ -4,7 +4,7 @@ import { AuthService } from '../../../auth/auth.service';
 import { Observable } from 'rxjs';
 import { User } from '../../pages/users/models';
 import { Store } from '@ngrx/store';
-import { selectAuthUser } from 'src/app/store/auth/auth.selections';
+import { selectAuthUser } from 'src/app/store/auth/auth.selectiors';
 
 @Component({
   selector: 'app-toolbar',

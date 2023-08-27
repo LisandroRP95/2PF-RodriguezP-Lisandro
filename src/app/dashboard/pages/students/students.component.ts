@@ -4,6 +4,8 @@ import { StudentsService } from './students.service';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { StudentFormDialogComponent } from './student-form-dialog/student-form-dialog.component';
+import { Store } from '@ngrx/store';
+import { selectIsAdmin } from 'src/app/store/auth/auth.selectiors';
 
 @Component({
   selector: 'app-students',
@@ -16,6 +18,8 @@ export class StudentsComponent implements OnInit{
   public data$: Observable<Student[]>;
   public displayedColumns = ['id','name', 'surname','birthYear', 'actions'];
 
+  public isAdmin$: Observable<boolean>;
+
   @Input()
   dataSource2: Student[] = [];
 
@@ -27,8 +31,10 @@ export class StudentsComponent implements OnInit{
 
   constructor(
     private StudentsService: StudentsService,
-    private MatDialog: MatDialog) {
+    private MatDialog: MatDialog,
+    private store: Store) {
     this.data$ = this.StudentsService.getStudents();
+    this.isAdmin$ = this.store.select(selectIsAdmin);
   }
 
 

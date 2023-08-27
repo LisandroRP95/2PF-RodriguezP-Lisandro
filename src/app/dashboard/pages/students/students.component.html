@@ -1,6 +1,8 @@
 <h1 appTitleSize>Alumnos</h1>
 
-<button (click)="onCreateStudent()" mat-flat-button color="primary" type="button">
+<button 
+[disabled]="!(isAdmin$ | async)" 
+(click)="onCreateStudent()" mat-flat-button color="primary" type="button">
     <mat-icon>add</mat-icon>
     Agregar alumno
 </button>
@@ -43,7 +45,7 @@
             </button>
             
             <!-- Boton Borrar -->
-            <button (click)="onDeleteStudent(student.id)" mat-icon-button color="warn">
+            <button [disabled]="!(isAdmin$ | async)" (click)="onDeleteStudent(student.id)" mat-icon-button color="warn">
                 <mat-icon>delete</mat-icon>
             </button>
             

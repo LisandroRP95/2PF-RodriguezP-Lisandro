@@ -6,15 +6,18 @@
       "email": "lrp@mail.com",
       "password": "1234",
       "token": "OrFJbZW23w9VoEilRAFj",
+      "role": "ADMINISTRADOR",
       "id": 1
     },
     {
-      "name": "Josn",
-      "surname": "Json",
-      "email": "json@mail.com",
+      "name": "Josue",
+      "surname": "Profe",
+      "email": "jb@mail.com",
       "password": "223455",
       "token": "OrFJbZWIKw9VoEilRAFj",
+      "role": "USUARIO",
       "id": 2
+
     },
     {
       "name": "No me anda",
