@@ -6,3 +6,5 @@ export const selectCoursesState = createFeatureSelector<fromCourses.State>(
 );
 
 export const selectCoursesArray = createSelector(selectCoursesState, (state) => state.courses)
+
+export const selectCourseDetailName = createSelector(selectCoursesState, (state) => state.courseDetail?.name)

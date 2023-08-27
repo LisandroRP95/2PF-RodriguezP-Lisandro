@@ -1,20 +1,28 @@
-<h1 appTitleSize>Curso</h1>
+<h1>Detalle del curso: {{ courseName$ | async}}
+</h1>
+<h3>Curso</h3>
 
 <button routerLink=".." mat-icon-button>
-    <mat-icon>arrow_back</mat-icon>
+  <mat-icon>arrow_back</mat-icon>
 </button>
 
+<table mat-table [dataSource]="students">
 
-    <mat-card  class="example-card">
-        <mat-card-header>
-          <mat-card-title-group>
-            <mat-card-title> ID: {{courseId}} Nombre:  {{ course?.name }} </mat-card-title>
-            <mat-card-subtitle>Codigo de curso: {{ course?.courseCode }}</mat-card-subtitle>
-            <img mat-card-md-image src="https://img.freepik.com/vector-premium/logotipo-educacion-linea-icono-pegatina-vector-curso-e-learning-casa-estudio-linea-educacion-distancia-libros-electronicos-banner-examen-distancia-vector-sobre-fondo-aislado-eps-10_399089-1128.jpg?w=1800"  alt="Default profile picture">
-          </mat-card-title-group>
-        </mat-card-header>
-        <mat-card-content>
-         Descripción {{ course?.description }}
-        </mat-card-content>
-      </mat-card>
- 
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let courses"> {{ courses.id }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Curso </th>
+    <td mat-cell *matCellDef="let courses"> {{ courses.name }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="courseCode">
+    <th mat-header-cell *matHeaderCellDef> Código </th>
+    <td mat-cell *matCellDef="let courses"> {{ courses.courseCode }} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

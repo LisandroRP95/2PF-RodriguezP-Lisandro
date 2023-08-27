@@ -46,7 +46,8 @@ export class StudentsComponent implements OnInit{
           this.StudentsService.createStudent({
             name: newStudent.name,
             surname: newStudent.surname,
-            birthYear: newStudent.birthYear
+            birthYear: newStudent.birthYear,
+            courseId: newStudent.courseId
           });
         
         } else {}

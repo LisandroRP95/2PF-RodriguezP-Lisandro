@@ -3,12 +3,14 @@ export interface Student {
     name: string,
     surname: string,
     birthYear: number,
+    courseId: number
 }
 
 export interface CreateStudentData {
     name: string;
     surname: string;
     birthYear: number;
+    courseId: number
 }
 
 export interface UpdateStudentData {

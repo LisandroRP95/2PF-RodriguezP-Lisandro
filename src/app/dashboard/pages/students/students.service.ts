@@ -90,7 +90,6 @@ export class StudentsService {
     })
   }
 
-
   deleteStudent(id: number): void{
     this.httpClient.delete(environment.baseApiUrl + 'students/' + id)
     .pipe(
@@ -103,5 +102,9 @@ export class StudentsService {
     ).subscribe({
       next: (updatedArray) => this._students$.next(updatedArray),
     })
+  }
+
+  getSudentsByCourseId(courseId: number): Observable<Student[]>{
+   return this.httpClient.get<Student[]>(environment.baseApiUrl + `/students?courseId=${courseId}`)
   }
 }

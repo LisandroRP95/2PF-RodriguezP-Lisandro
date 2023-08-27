@@ -54,7 +54,8 @@ export class CoursesComponent  implements OnInit{
             this.CoursesService.createCourse({
               name: newCourse.name,
               description: newCourse.description,
-              courseCode: newCourse.courseCode
+              courseCode: newCourse.courseCode,
+              courseId: newCourse.courseId
             });
           
           } else {}
