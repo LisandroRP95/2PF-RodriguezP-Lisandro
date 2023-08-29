@@ -1,8 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { InscriptionsActions } from 'src/app/store/inscriptions.actions';
-import { selectInscriptionsState, selectInscriptionsStateValue } from 'src/app/store/inscriptions.selectors';
+import { InscriptionsActions } from './store/inscriptions.actions';
 import { Observable } from 'rxjs';
+import { InscriptionWithStudentAndCourse } from './model';
+import { selectInscriptions } from './store/inscriptions.selectors';
+import { MatDialog } from '@angular/material/dialog';
+import { InscriptionDialogComponent } from './inscription-dialog/inscription-dialog.component';
+
+
 
 @Component({
   selector: 'app-inscriptions',
@@ -10,20 +15,20 @@ import { Observable } from 'rxjs';
   styles: [
   ]
 })
-export class InscriptionsComponent {
+export class InscriptionsComponent implements OnInit {
+    displayedColumns = ['id', 'student', 'course'];
+
+  inscriptions$: Observable<InscriptionWithStudentAndCourse[]>;
  
- public value$: Observable<number>; 
-
- constructor(private store: Store) {
-
-  this.value$ = this.store.select(selectInscriptionsStateValue);
+ constructor(private store: Store, private matDialog: MatDialog) {
+  this.inscriptions$ = this.store.select(selectInscriptions)
  }
 
- onIncrement(): void {
-  this.store.dispatch(InscriptionsActions.increment());
- }
+ onAdd(): void {
+  this.matDialog.open(InscriptionDialogComponent);
+ } 
 
- onDecrement(): void {
-  this.store.dispatch(InscriptionsActions.decrement());
+ ngOnInit(): void {
+   this.store.dispatch(InscriptionsActions.loadInscriptionss())
  }
 }

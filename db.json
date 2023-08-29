@@ -17,7 +17,6 @@
       "token": "OrFJbZWIKw9VoEilRAFj",
       "role": "USUARIO",
       "id": 2
-
     },
     {
       "name": "No me anda",
@@ -49,7 +48,7 @@
       "courseId": 2
     }
   ],
-  "courses":[
+  "courses": [
     {
       "id": 1,
       "name": "Java",
@@ -70,6 +69,28 @@
       "description": "description de curso 3",
       "courseCode": 1996,
       "courseId": 3
+    }
+  ],
+  "inscriptions": [
+    {
+      "id": 1,
+      "studentId": 1,
+      "courseId": 1
+    },
+    {
+      "id": 2,
+      "studentId": 2,
+      "courseId": 1
+    },
+    {
+      "id": 3,
+      "studentId": 3,
+      "courseId": 2
+    },
+    {
+      "studentId": 1,
+      "courseId": 2,
+      "id": 4
     }
   ]
 }

@@ -34,8 +34,8 @@ const COURSES_DB: Observable<Course[]> = of([
 })
 export class CoursesService {
 
-  private courses$ = new BehaviorSubject<Course[]>([]);
-  private _courses$ = this.courses$.asObservable();
+  private _courses$ = new BehaviorSubject<Course[]>([]);
+  public courses$ = this._courses$.asObservable();
 
   private sendNotifications$ = new Subject<string>();
 
@@ -58,16 +58,16 @@ export class CoursesService {
 
   loadCourses(): void {
     COURSES_DB.subscribe({
-      next: (courseFromDb) => this.courses$.next(courseFromDb)
+      next: (courseFromDb) => this._courses$.next(courseFromDb)
     });
   }
 
   getCourses(): Subject<Course[]> {
-    return this.courses$;
+    return this._courses$;
   }
 
   getCoursesbyId(id: number): Observable<Course | undefined> {
-    return this._courses$.pipe(
+    return this.courses$.pipe(
       map((courses) => courses.find((c) => c.id === id)),
       take(1),
     )
@@ -76,7 +76,7 @@ export class CoursesService {
   createCourse(course: CreateCourseData): void {
     this.courses$.pipe(take(1)).subscribe({
       next: (arrayActual) => {
-        this.courses$.next([
+        this._courses$.next([
           ...arrayActual,
           {...course, id: arrayActual.length + 1},
         ]);
@@ -87,7 +87,7 @@ export class CoursesService {
   updateCourseById(id: number, updatedCourse: UpdateCourseData): void {
     this.courses$.pipe(take(1)).subscribe({
       next: (arrayActual) => {
-        this.courses$.next(
+        this._courses$.next(
           arrayActual.map((course) => course.id === id? {...course, ...updatedCourse} : course)
         );
       },
@@ -97,7 +97,7 @@ export class CoursesService {
   deleteCourse(id: number): void{
     this.courses$.pipe(take(1)).subscribe({
       next: (arrayActual) => {
-        this.courses$.next(
+        this._courses$.next(
           arrayActual.filter((course) => course.id !== id));
       }
     })

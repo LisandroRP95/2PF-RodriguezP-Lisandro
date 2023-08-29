@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 export class StudentsService {
 
   private _students$ = new BehaviorSubject<Student[]>([]);
-  private students$ = this._students$.asObservable();
+  public students$ = this._students$.asObservable();
 
   private sendNotifications$ = new Subject<string>();
   private _isLoading$ = new BehaviorSubject(false);
