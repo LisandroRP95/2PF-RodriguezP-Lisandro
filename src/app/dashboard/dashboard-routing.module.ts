@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
-import { InscriptionsComponent } from './pages/inscriptions/inscriptions.component';
 import { NotFoundComponent } from '../not-found/not-found.component';
 import { adminGuard } from '../core/guards/admin.guard';
 

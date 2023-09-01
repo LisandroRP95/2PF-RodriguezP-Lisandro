@@ -41,8 +41,6 @@ export class InscriptionDialogComponent implements OnInit {
     if(this.inscriptionForm.invalid) {
       this.inscriptionForm.markAllAsTouched();
     } else { 
-      console.log(this.inscriptionForm.getRawValue());
-
       this.store.dispatch(InscriptionsActions.createInscription({ payload: this.inscriptionForm.getRawValue() }));
       this.matDialogRef.close();
       

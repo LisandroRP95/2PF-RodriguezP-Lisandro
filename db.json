@@ -26,6 +26,12 @@
       "role": "USUARIO",
       "token": "PBgpywERqq0QcpRT8qSh",
       "id": 3
+    },
+    {
+      "name": "Belu",
+      "surname": "RP",
+      "birthYear": 1990,
+      "id": 4
     }
   ],
   "students": [
@@ -33,22 +39,19 @@
       "id": 1,
       "name": "Lisandro",
       "surname": "Rodriguez Peña",
-      "birthYear": 1995,
-      "courseId": 1
+      "birthYear": 1995
     },
     {
       "id": 2,
       "name": "Pedro",
       "surname": "Parquero",
-      "birthYear": 1962,
-      "courseId": 1
+      "birthYear": 1962
     },
     {
       "id": 3,
       "name": "Bruno",
       "surname": "Dias",
-      "birthYear": 1940,
-      "courseId": 2
+      "birthYear": 1940
     }
   ],
   "courses": [
@@ -57,21 +60,21 @@
       "name": "Java",
       "description": "description de curso 1",
       "courseCode": 1995,
-      "courseId": 1
+      "categoryId": 1
     },
     {
       "id": 2,
       "name": "HTML",
       "description": "description de curso 2",
       "courseCode": 1993,
-      "courseId": 2
+      "categoryId": 2
     },
     {
       "id": 3,
       "name": "CSS",
       "description": "description de curso 3",
       "courseCode": 1996,
-      "courseId": 3
+      "categoryId": 3
     }
   ],
   "categories": [

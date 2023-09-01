@@ -1,16 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CategoriesComponent } from '../categories/categories.component';
-import { CategoryDetailComponent } from '../categories/category-detail/category-detail.component';
+import { InscriptionsComponent } from './inscriptions.component';
+
 
 const routes: Routes = [
   {
     path: '',
-    component: CategoriesComponent
-  },
-  {
-    path: ':id',
-    component: CategoryDetailComponent
+    component: InscriptionsComponent
   }
 ];
 
@@ -18,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CategoriesRoutingModule { }
+export class InscriptionsRoutingModule { }

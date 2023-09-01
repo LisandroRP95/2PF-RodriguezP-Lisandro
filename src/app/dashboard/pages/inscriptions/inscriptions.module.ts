@@ -8,6 +8,7 @@ import { InscriptionsEffects } from './store/inscriptions.effects';
 import { StoreModule } from '@ngrx/store';
 import { inscriptionsFeature } from './store/inscriptions.reducer';
 import { InscriptionDialogComponent } from './inscription-dialog/inscription-dialog.component';
+import { InscriptionsRoutingModule } from './inscriptions-routing.module';
 
 
 
@@ -19,6 +20,7 @@ import { InscriptionDialogComponent } from './inscription-dialog/inscription-dia
   imports: [
     CommonModule,
     SharedModule,
+    InscriptionsRoutingModule,
     RouterModule.forChild([{path: '', component: InscriptionsComponent}]),
     EffectsModule.forFeature([InscriptionsEffects]),
     StoreModule.forFeature(inscriptionsFeature)

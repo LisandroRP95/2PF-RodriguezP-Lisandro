@@ -55,7 +55,7 @@ export class CoursesComponent  implements OnInit{
               name: newCourse.name,
               description: newCourse.description,
               courseCode: newCourse.courseCode,
-              courseId: newCourse.courseId
+              categoryId: newCourse.categoryId
             });
           
           } else {}

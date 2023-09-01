@@ -3,19 +3,19 @@ export interface Course {
     name: string;
     description: string;
     courseCode: number;
-    courseId: number
+    categoryId: number
 }
 
 export interface CreateCourseData {
     name: string;
     description: string;
     courseCode: number;
-    courseId: number
+    categoryId: number
 }
 
 export interface UpdateCourseData {
     name?: string;
     description?: string;
     courseCode?: number;
-    courseId?: number
+    categoryId?: number
 }
