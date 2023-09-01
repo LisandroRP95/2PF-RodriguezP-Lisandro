@@ -12,6 +12,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ToolbarComponent } from './layout/toolbar/toolbar.component';
 import { NavMenuComponent } from './layout/nav-bar/nav-menu.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
+import { CategoriesModule } from './pages/categories/categories.module';
 
 
 
@@ -21,6 +22,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
     DashboardComponent,
     NavMenuComponent,
     ToolbarComponent,
+
 
 
   
@@ -36,6 +38,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
     UsersModule,
     RouterModule,
     SharedModule,
+    CategoriesModule
 
   ],
   exports: [

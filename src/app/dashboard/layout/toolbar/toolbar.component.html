@@ -1,12 +1,19 @@
 <!-- TOOLBAR -->
 <mat-toolbar color="primary">
-  <button (click)="drawer?.toggle()" mat-icon-button class="example-icon"
-    aria-label="Example icon-button with menu icon">
+  <button 
+        (click)="drawer?.toggle()"
+        mat-icon-button class="example-icon"
+        aria-label="Example icon-button with menu icon"
+        >
+
     <mat-icon>menu</mat-icon>
   </button>
   <div class="col-5 field" appTitleSize> Trabajo Final Angular - LRP </div>
+
   <div class="col-5 field">
-    <p *ngIf="authUser$ | async; let authUser ">{{ authUser?.name }} {{ authUser?.surname }}</p>
+    <p *ngIf="authUser$ | async; let authUser ">
+      {{ authUser?.name }} {{ authUser?.surname }}
+    </p>
   </div>
 </mat-toolbar>
 <!-- FIN TOOLBAR -->

@@ -11,6 +11,7 @@ import { StoreModule } from '@ngrx/store';
 import { appReducer } from './store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+import { CategoriesModule } from './dashboard/pages/categories/categories.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { EffectsModule } from '@ngrx/effects';
     BrowserAnimationsModule,
     CoursesModule,
     StudentsModule,
+    CategoriesModule,
     InscriptionsModule,
     HttpClientModule,
     StoreModule.forRoot(appReducer, {}),

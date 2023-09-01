@@ -14,15 +14,15 @@ import { Store } from '@ngrx/store';
 @Injectable()
 export class InscriptionsEffects {
 
-  loadInscriptionss$ = createEffect(() => {
+  loadInscriptions$ = createEffect(() => {
     return this.actions$.pipe(
 
-      ofType(InscriptionsActions.loadInscriptionss),
+      ofType(InscriptionsActions.loadInscriptions),
       concatMap(() =>
         /** An EMPTY observable only emits completion. Replace with your own observable API request */
         this.getInscriptionsFromDb().pipe(
-          map(data => InscriptionsActions.loadInscriptionssSuccess({ data })),
-          catchError(error => of(InscriptionsActions.loadInscriptionssFailure({ error }))))
+          map(data => InscriptionsActions.loadInscriptionsSuccess({ data })),
+          catchError(error => of(InscriptionsActions.loadInscriptionsFailure({ error }))))
       )
     );
   });
@@ -70,7 +70,7 @@ export class InscriptionsEffects {
     return this.actions$.pipe(
 
       ofType(InscriptionsActions.createInscriptionSuccess),
-      map(() => this.store.dispatch(InscriptionsActions.loadInscriptionss()))
+      map(() => this.store.dispatch(InscriptionsActions.loadInscriptions()))
     );
   }, {dispatch: false });
 

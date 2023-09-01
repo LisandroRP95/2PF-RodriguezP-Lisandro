@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { loginPayload } from "./models";
+import { LoginPayload } from "./models";
 import { BehaviorSubject, Observable, map, take } from 'rxjs';
 import { User } from "src/app/dashboard/pages/users/models";
 import { NotifierService } from "src/app/core/services/notifier.service";
@@ -7,13 +7,13 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Store } from "@ngrx/store";
 import { authActions } from "../store/auth/auth.actions";
+import { selectAuthUser } from "../store/auth/auth.selectiors";
 
 @Injectable({ providedIn: 'root' })
 
 export class AuthService {
 
-    // private _authUser$ = new BehaviorSubject<User | null>(null);
-    // public authUser$ = this._authUser$.asObservable();
+    public authUser$ = this.store.select(selectAuthUser);
 
     constructor(private notifier: NotifierService, 
                 private router: Router,
@@ -22,23 +22,24 @@ export class AuthService {
                 ) {}
 
     isAuthenticated(): Observable<boolean>{
-        // return this.authUser$.pipe(
-        //     take(1),
-        //     map((user) => !!user),
-        //     );
-
         return this.httpClient.get<User[]>('http://localhost:3000/users', {
             params: {
                 token: localStorage.getItem('token') || '',
             }
         }).pipe(
             map((usersResult) => {
+
+            if (usersResult.length) {
+                const authUser = usersResult[0];
+                    
+                    this.store.dispatch(authActions.setAuthUser({ payload: authUser }));
+                  }
                 return !!usersResult.length
             })
         )
     }
 
-    login(payload: loginPayload): void {
+    login(payload: LoginPayload): void {
         this.httpClient.get<User[]>('http://localhost:3000/users', {
             params: {
                 email: payload.email || '',
@@ -48,13 +49,14 @@ export class AuthService {
             next: (response) => {
                 if (response.length) { 
                     const authUser = response[0];
-                    // this._authUser$.next(authUser);
                     this.store.dispatch(authActions.setAuthUser({payload: authUser}));
+
                     this.router.navigate(['/dashboard/home']);
+                    
                     localStorage.setItem('token', authUser.token);
                 }else{
                     this.notifier.showError('Dirección email inválida');
-                    // this._authUser$.next(null);
+                    
                     this.store.dispatch(authActions.setAuthUser({payload: null}));
                 }
             },

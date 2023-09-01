@@ -13,26 +13,20 @@ import { Observable, map } from 'rxjs';
 })
 export class UsersComponent {
 public users: Observable<User[]>;
+public isLoading$: Observable<boolean>;
+public loading = false;
 
 constructor(private matDialog: MatDialog, private UserService: UserService) {
-    this.users = this.UserService.getUsers().pipe(
-    map((valorOriginal) =>
-    valorOriginal.map((usuario)=>({
-      ...usuario,
-      name: usuario.name.toUpperCase(),
-      surname:usuario.surname.toUpperCase(),
-    }))
-    ),
-    );
-
-    this.UserService.loadUsers();
-    
+ this.UserService.loadUsers();
+ this.isLoading$ = this.UserService.isLoading$;
+ this.users = this.UserService.getUsers();
   }
 
 onCreateUser(): void {
-  const dialogRef = this.matDialog.open(UserFormDialogComponent);
+  this.matDialog.open(UserFormDialogComponent)
 
-  dialogRef.afterClosed().subscribe({
+  .afterClosed()
+  .subscribe({
     next: (newUser) => {
       if (newUser){
       this.UserService.createUser({
@@ -53,7 +47,7 @@ onDeleteUser(userToDelete: User): void {
   if (confirm(`¿Realmente quiere eliminar a ${userToDelete.surname}, ${userToDelete.name}?`)){
      this.UserService.deleteUserById(userToDelete.id);
      this.UserService.sendNotification('Se elimino el ususario');
-  }
+     }
 }
 
 onEditUser(userToEdit: User): void {

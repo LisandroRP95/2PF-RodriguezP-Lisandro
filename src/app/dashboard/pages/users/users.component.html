@@ -5,6 +5,12 @@
     </button>
 </div>
 
+<div *ngIf="isLoading$ | async; else notloadingTemplate">
+    Esta cargando
+</div>
+<ng-template #notloadingTemplate>
+
+
     <app-users-table
         [dataSource]="(users | async) ||[]"
         (deleteUser)="onDeleteUser($event)"

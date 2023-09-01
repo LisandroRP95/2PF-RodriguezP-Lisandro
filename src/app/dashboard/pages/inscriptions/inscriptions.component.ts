@@ -29,6 +29,6 @@ export class InscriptionsComponent implements OnInit {
  } 
 
  ngOnInit(): void {
-   this.store.dispatch(InscriptionsActions.loadInscriptionss())
+   this.store.dispatch(InscriptionsActions.loadInscriptions())
  }
 }

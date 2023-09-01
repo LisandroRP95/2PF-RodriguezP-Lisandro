@@ -26,21 +26,21 @@ export const initialState: State = {
 export const reducer = createReducer(
   initialState,
 
-  on(InscriptionsActions.loadInscriptionss, state => {
+  on(InscriptionsActions.loadInscriptions, state => {
     return {
       ...state,
       loading: true
     }
   }),
 
-  on(InscriptionsActions.loadInscriptionssSuccess, (state, action) => {
+  on(InscriptionsActions.loadInscriptionsSuccess, (state, action) => {
     return {
       ...state,
       data: action.data,
       loading: false
     }
   }),
-  on(InscriptionsActions.loadInscriptionssFailure, (state, action) => {
+  on(InscriptionsActions.loadInscriptionsFailure, (state, action) => {
     return {
       ...state,
       error: action.error,

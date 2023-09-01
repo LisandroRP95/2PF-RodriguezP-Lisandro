@@ -13,7 +13,6 @@ export const adminGuard: CanActivateFn = (route, state) => {
 
     map((isAdmin) => {
 
-      console.log(adminGuard.name, 'Solo acceso Admin')
       if(!isAdmin) return router.createUrlTree(['/dashboard/home'])
 
       return true;

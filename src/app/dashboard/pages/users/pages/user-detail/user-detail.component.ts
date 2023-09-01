@@ -30,7 +30,10 @@ export class UserDetailComponent {
 
   loadUser(): void{
     if(this.userId){
-      this.usersService.getUserById(this.userId).subscribe()
+      this.usersService.getUserById(this.userId).subscribe({
+        next: (user) => console.log(user),
+      }
+      )
     }
   }
 }

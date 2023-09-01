@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, take, Subject, map } from 'rxjs';
 import { CreateCourseData, Course, UpdateCourseData } from './models';
 import Swal from 'sweetalert2';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 const COURSES_DB: Observable<Course[]> = of([
   {
@@ -39,7 +41,7 @@ export class CoursesService {
 
   private sendNotifications$ = new Subject<string>();
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.sendNotifications$.subscribe({
       next: (message) =>
       Swal.fire({
@@ -101,5 +103,9 @@ export class CoursesService {
           arrayActual.filter((course) => course.id !== id));
       }
     })
+  }
+
+  getCourseByCategoryId(categoryId: number): Observable<Course[]> {
+    return this.http.get<Course[]>(environment.baseApiUrl + `/courses?categoryId=${categoryId}`)
   }
 }

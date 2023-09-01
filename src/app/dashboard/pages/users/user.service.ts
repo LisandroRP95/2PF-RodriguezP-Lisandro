@@ -58,14 +58,14 @@ export class UserService {
     })
   }  
 
-  getUsers(): Subject<User[]> {
-    return this._users$;
+  getUsers(): Observable<User[]> {
+    return this.users$;
   }
 
-  getUserById(id: number): Observable<User | undefined> {
-    return this._users$.pipe(
-      map((users) => users.find((u) => u.id === id)),
+  getUserById(id: number) {
+    return this.users$.pipe(
       take(1),
+      map((users) => users.find((u) => u.id === id)),
       )
   }
 
@@ -97,15 +97,11 @@ export class UserService {
 
   deleteUserById(id: number): void {
     this.httpClient.delete(environment.baseApiUrl + 'users/' + id)
-    .pipe(
-      mergeMap(
-        (deletedUserResponse) => this.users$.pipe(
-          take(1),
-          map((curentArray) => curentArray.filter((user) => user.id !== id))
-        )
-      )
-    ).subscribe({
-      next: (updatedArray) => this._users$.next(updatedArray),
+    .pipe().subscribe({
+      next: (updatedArray) => this.loadUsers(),
+      error: (err) => this.notifier.showError('Ocurrio un error'),
+      complete: () => {}
     })
   }
 }
+ 

@@ -7,9 +7,9 @@ import { Course } from '../../courses/models';
 export const InscriptionsActions = createActionGroup({
   source: 'Inscriptions',
   events: {
-    'Load Inscriptionss': emptyProps(),
-    'Load Inscriptionss Success': props<{ data: InscriptionWithStudentAndCourse[] }>(),
-    'Load Inscriptionss Failure': props<{ error: HttpErrorResponse }>(),
+    'Load Inscriptions': emptyProps(),
+    'Load Inscriptions Success': props<{ data: InscriptionWithStudentAndCourse[] }>(),
+    'Load Inscriptions Failure': props<{ error: HttpErrorResponse }>(),
 
     'Load Students Options': emptyProps(),
     'Load Students Options Success': props<{ data: Student[] }>(),

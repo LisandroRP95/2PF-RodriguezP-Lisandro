@@ -10,18 +10,21 @@
       "id": 1
     },
     {
-      "name": "Josue",
-      "surname": "Profe",
+      "name": "JOSUE",
+      "surname": "PROFE",
       "email": "jb@mail.com",
       "password": "223455",
-      "token": "OrFJbZWIKw9VoEilRAFj",
       "role": "USUARIO",
+      "token": "OrFJbZWIKw9VoEilRAFj",
       "id": 2
     },
     {
-      "name": "No me anda",
-      "surname": "como quiero",
-      "birthYear": 12222,
+      "name": "Usuario",
+      "surname": "User",
+      "email": "u@mail",
+      "password": "1234",
+      "role": "USUARIO",
+      "token": "PBgpywERqq0QcpRT8qSh",
       "id": 3
     }
   ],
@@ -69,6 +72,20 @@
       "description": "description de curso 3",
       "courseCode": 1996,
       "courseId": 3
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Presencial"
+    },
+    {
+      "id": 2,
+      "name": "On-line"
+    },
+    {
+      "id": 1,
+      "name": "Hibrida"
     }
   ],
   "inscriptions": [

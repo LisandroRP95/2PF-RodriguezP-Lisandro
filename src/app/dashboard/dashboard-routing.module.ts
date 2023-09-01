@@ -30,6 +30,10 @@ import { adminGuard } from '../core/guards/admin.guard';
                 loadChildren: () => import('./pages/inscriptions/inscriptions.module').then((typescriptModule) => typescriptModule.InscriptionsModule)
             },
             {
+                path: 'categories',
+                loadChildren: () => import('./pages/categories/categories.module').then((typescriptModule) => typescriptModule.CategoriesModule)
+            },
+            {
                 path: '**',
                 component: NotFoundComponent,
             },
