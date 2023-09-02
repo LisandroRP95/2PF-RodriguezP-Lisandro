@@ -21,7 +21,7 @@ export class StudentsComponent implements OnInit{
   public isAdmin$: Observable<boolean>;
 
   @Input()
-  dataSource2: Student[] = [];
+  dataSourceStudent: Student[] = [];
 
   @Output()
   deleteStudent = new EventEmitter<Student>();

@@ -20,7 +20,7 @@
         <div class="col-6 field">
             <mat-form-field class="w-full" appearance="outline">
                 <mat-label>Código de Curso</mat-label>
-                <input formControlName="courseCode" matInput type="text" name="courseCode">
+                <input formControlName="courseCode" matInput type="number" name="courseCode">
                 <mat-error *ngFor="let error of descriptionControl.errors | keyvalue ">
                     {{ error | controlErrorMessage}}
                 </mat-error>
@@ -30,7 +30,7 @@
         <div class="col-12 field">
             <mat-form-field class="w-full" appearance="outline">
                 <mat-label>Descripción</mat-label>
-                <input formControlName="description" matInput type="number" name="description">
+                <input formControlName="description" matInput type="text" name="description">
                 <mat-error *ngFor="let error of courseCodeControl.errors | keyvalue ">
                     {{ error | controlErrorMessage}}
                 </mat-error>

@@ -1,11 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { StudentsService } from '../../students/students.service';
-import { Student } from '../../students/models';
-import { Store } from '@ngrx/store';
-import { CoursesActions } from '../store/courses.actions';
-import { Observable } from 'rxjs';
-import { selectCourseDetailName } from '../store/courses.selectors';
+import { Course } from '../models';
+import { CoursesService } from '../courses.service';
+
 
 
 @Component({
@@ -14,28 +11,33 @@ import { selectCourseDetailName } from '../store/courses.selectors';
   styles: [
   ]
 })
-export class CoursesDetailComponent implements OnInit {
+export class CoursesDetailComponent {
 
-  displayedColumns = ['id', 'name', 'courseCode'];
-  students: Student[] = [];
-  courseName$: Observable<string | undefined>; 
+  public course: Course | null = null;
+  public courseId?: number;
+
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private studentsService: StudentsService,
-    private store: Store
+    private router: Router,
+    private coursesService: CoursesService
     ) {
-      console.log(this.activatedRoute.snapshot.params);
-      this.courseName$ = this.store.select(selectCourseDetailName);
-    }
+   if (!Number(this.activatedRoute.snapshot.params['id'])) {
+    this.router.navigate(['dashboard', 'users']);
+   } else {
+    this.courseId = Number(this.activatedRoute.snapshot.params['id']);
+    this.loadUser();
+   }
+  }
 
-    ngOnInit(): void {
-      this.store.dispatch(CoursesActions.loadCoursesDetail({courseId: this.activatedRoute.snapshot.params['id']}))
 
-      
-      this.studentsService.getSudentsByCourseId(this.activatedRoute.snapshot.params['id']).subscribe({
-        next: (students) => (this.students = students),
-      })
+  loadUser(): void{
+    if(this.courseId){
+      this.coursesService.getCoursesbyId(this.courseId).subscribe({
+        next: (course) => console.log(course),
+      }
+      )
     }
+  }
   }
   

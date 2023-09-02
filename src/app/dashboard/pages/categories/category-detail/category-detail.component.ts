@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -6,6 +6,8 @@ import { CoursesService } from '../../courses/courses.service';
 import { Course } from '../../courses/models';
 import { selectCategoryDetailName } from '../store/categories.selectors';
 import { CategoriesActions } from '../store/categories.actions';
+import { COURSES_MOCK } from '../../courses/mocks';
+import { Category } from '../models';
 
 @Component({
   selector: 'app-category-detail',
@@ -16,8 +18,11 @@ import { CategoriesActions } from '../store/categories.actions';
 export class CategoryDetailComponent implements OnInit {
 
   displayedColumns = ['id', 'name'];
-  course: Course[] = [];
+  course: Course[] = COURSES_MOCK;
   categoryName$: Observable<string | undefined>;
+
+  @Input()
+  dataCategory: Category[] = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
